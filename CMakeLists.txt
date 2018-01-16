@@ -16,12 +16,16 @@
 #  - cmake .. -G "Visual Studio 14 2015"
 #
 #
-
 cmake_minimum_required (VERSION 3.0)
 
 project (CertGen)
 
 enable_testing()
+
+find_package(Threads)
+
+# Enable ExternalProject CMake module
+include(ExternalProject)
 
 if(MSVC)
   # RuntimeLibrary
@@ -51,13 +55,35 @@ else ()
     set (CMAKE_CXX_STANDARD 11)
 endif ()
 
+add_compile_options($<$<CXX_COMPILER_ID:MSVC>:/MP>)
+
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-include_directories(include_3rd_party)
-find_package(Threads)
+######################### SPDLOG
+
+# Download and install spdlog
+ExternalProject_Add(
+    spdlog
+    URL https://github.com/gabime/spdlog/archive/v0.16.3.zip
+    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/spdlog
+    # Disable install step
+    INSTALL_COMMAND ""
+)
+
+# Get GTest source and binary directories from CMake project
+ExternalProject_Get_Property(spdlog source_dir binary_dir)
+
+# Create a libgtest target to be used as a dependency by test programs
+add_library(libspdlog INTERFACE)
+add_dependencies(libspdlog spdlog)
+
+# I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
+include_directories("${source_dir}/include")
+
+###################### END SPDLOG
 
 add_subdirectory(src)
 

@@ -38,4 +38,4 @@ GENERATE_EXPORT_HEADER(${MODULE_NAME}
              EXPORT_FILE_NAME ${MODULE_NAME}_Export.h
              STATIC_DEFINE ${MODULE_NAME}_BUILT_AS_STATIC)
 
-target_link_libraries(${MODULE_NAME} OpenSSL::SSL ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(${MODULE_NAME} OpenSSL::SSL libspdlog ${CMAKE_THREAD_LIBS_INIT})

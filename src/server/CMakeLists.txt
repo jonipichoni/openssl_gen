@@ -25,4 +25,4 @@ include_directories(${PROJECT_BINARY_DIR}/src/lib)
 
 # link our executable "main" with the shared library "shared"
 #target_link_libraries(${MODULE_NAME} PUBLIC "CertCeg_Lib")
-target_link_libraries(${MODULE_NAME} PUBLIC "CertCeg_Lib" ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(${MODULE_NAME} PUBLIC "CertCeg_Lib" libspdlog ${CMAKE_THREAD_LIBS_INIT})
