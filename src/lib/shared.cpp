@@ -2,6 +2,14 @@
 #include "openssl_w.h"
 
 #include <iostream>
+
+void X::init() {
+	std::cout << "f2()\n";
+}
+
+void X::end() {
+	std::cout << "f2()\n";
+}
  
 void f() {
   std::cout << "f2()\n";

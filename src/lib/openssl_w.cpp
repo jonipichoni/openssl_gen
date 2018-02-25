@@ -5,6 +5,8 @@
 #include <openssl/x509.h>
 #include <iostream>
 
+#include "log.h"
+
 //OpenSSL 1.0.2-beta3 - Sep 25 2014
 #if (OPENSSL_VERSION_NUMBER < 0x10002FFFFL)
 	#ifdef _WIN32
@@ -176,6 +178,7 @@ int main_f()
 }
  
 void OpenSSLWrapper::createCertificate() {
+	ossl_lib::Logger::GetLogger()->error("Calling create certificate");
 	main_f();
 	std::cout << "createCertificate()\n";
 }

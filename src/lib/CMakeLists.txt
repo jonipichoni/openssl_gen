@@ -10,6 +10,8 @@ set(${MODULE_PREFIX}_SRCS
 	shared.h
 	openssl_w.cpp
 	openssl_w.h
+	log.cpp
+	log.h
 )
 
 # Export no symbols by default (if the compiler supports it).
