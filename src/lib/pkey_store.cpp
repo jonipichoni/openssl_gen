@@ -4,8 +4,10 @@
 #include "log.h"
 
 #define POOL_SIZE 5
+#define DEF_PKEY_SIZE 2048
 
-PKeyStore::PKeyStore() : PKeyStore(2048) 
+PKeyStore::PKeyStore() : 
+	PKeyStore(DEF_PKEY_SIZE)
 {}
 
 PKeyStore::PKeyStore(int keysize) :
@@ -16,10 +18,10 @@ PKeyStore::PKeyStore(int keysize) :
 PKeyStore::~PKeyStore()
 {}
 
-void PKeyStore::init() {
-
+void PKeyStore::init()
+{
 	ossl_lib::Logger::GetLogger()->error(
-"Initialize Private Key Store called");
+		"Initialize Private Key Store called");
 
 	fillPool();
 
@@ -27,7 +29,8 @@ void PKeyStore::init() {
 }
 
 
-EVP_KEY_sptr PKeyStore::getKey() {
+EVP_KEY_sptr PKeyStore::getKey()
+{
 
 	std::unique_lock<std::mutex> mlock(m_mutex);
 
