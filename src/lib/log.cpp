@@ -8,6 +8,7 @@ namespace ossl_lib
 
 		if (mpLog == nullptr) {
 			mpLog = spdlog::basic_logger_mt("ossl_lib", "ossl_lib.log");
+			spdlog::set_pattern("[%Y-%m-%d %H:%M:%S.%e %z][%t][%n][%l] %v");
 			mpLog->flush_on(spdlog::level::err);
 		}
 

@@ -22,6 +22,8 @@ void PKeyStore::init() {
 "Initialize Private Key Store called");
 
 	fillPool();
+
+	consumerAsync();
 }
 
 
@@ -104,6 +106,23 @@ void PKeyStore::fillPoolAsync()
 	if (!m_fillingPool)
 	{
 		std::thread threadObj(&PKeyStore::fillPool, this);
+		threadObj.detach();
+	}
+}
+
+void PKeyStore::consumer()
+{
+	for(int i = 0; i < 10; i++) {
+		getKey();
+		ossl_lib::Logger::GetLogger()->error(
+			"Key Consumed");
+	}
+}
+
+void PKeyStore::consumerAsync()
+{
+	for (int i = 0; i < 4; i++) {
+		std::thread threadObj(&PKeyStore::consumer, this);
 		threadObj.detach();
 	}
 }

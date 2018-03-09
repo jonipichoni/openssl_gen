@@ -26,6 +26,8 @@ private:
 	void fillPool();
 	void fillPoolAsync();
 	EVP_PKEY* genereateKey();
+	void consumerAsync();
+	void consumer();
 
 private:
 	std::queue<EVP_KEY_sptr>	m_queue;

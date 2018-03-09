@@ -31,11 +31,5 @@ void X::mXOpenssl() {
 	auto store = std::make_unique<PKeyStore>(2048);
 	store->init();
 
-	for (int i = 0; i < 50; i++) {
-
-		EVP_KEY_sptr key = store->getKey();
-
-		ossl_lib::Logger::GetLogger()->error("Key Used");
-	}
-
+	/*Sleep(30000);*/
 }
