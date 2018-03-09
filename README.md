@@ -4,7 +4,9 @@ Build:
 	Include Openssl f
 Windows:
 	Openssl: https://slproweb.com/products/Win32OpenSSL.html
-	cmake .. -G "Visual Studio 14 2015" -DOPENSSL_ROOT_DIR=C:/OpenSSL-Win322 -DOPENSSL_INCLUDE_DIR=C:/OpenSSL-Win32/include -DBUILD_SHARED_LIBS=OFF
+	cmake .. -DOPENSSL_ROOT_DIR=C:/OpenSSL-Win322 -DOPENSSL_INCLUDE_DIR=C:/OpenSSL-Win32/include -DBUILD_SHARED_LIBS=OFF
+	cmake --build . --target ALL_BUILD --config Release
+
 
 Linux:
 	sudo apt-get install libssl-dev

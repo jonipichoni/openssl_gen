@@ -1,6 +1,6 @@
 #include "shared.h"
 #include "spdlog/spdlog.h"
-#include <openssl\ssl.h>
+//#include <openssl\ssl.h>
 
 #include <map>
 

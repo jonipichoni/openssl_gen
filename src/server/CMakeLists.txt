@@ -5,8 +5,13 @@
 set(MODULE_NAME "CertCeg_Server")
 set(MODULE_PREFIX "PRE_${MODULE_NAME}")
 
-set(${MODULE_PREFIX}_SRCS
-	main.cpp
+#set(${MODULE_PREFIX}_SRCS
+#	main.cpp
+#)
+
+file(GLOB ${MODULE_PREFIX}_SRCS
+    "*.h"
+    "*.cpp"
 )
 
 # Always include the source and build directories in the include path.

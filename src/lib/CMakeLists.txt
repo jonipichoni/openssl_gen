@@ -1,17 +1,22 @@
-# cmake -G "Visual Studio 12 2013" .
+# cmake .. -DOPENSSL_ROOT_DIR=C:/OpenSSL-Win322 -DOPENSSL_INCLUDE_DIR=C:/OpenSSL-Win32/include -DBUILD_SHARED_LIBS=OFF
 # cmake --build . --target ALL_BUILD --config Release
 
 
 set(MODULE_NAME "CertCeg_Lib")
 set(MODULE_PREFIX "PRE_${MODULE_NAME}")
 
-set(${MODULE_PREFIX}_SRCS
-	shared.cpp
-	shared.h
-	openssl_w.cpp
-	openssl_w.h
-	log.cpp
-	log.h
+#set(${MODULE_PREFIX}_SRCS
+#	shared.cpp
+#	shared.h
+#	openssl_w.cpp
+#	openssl_w.h
+#	log.cpp
+#	log.h
+#)
+
+file(GLOB ${MODULE_PREFIX}_SRCS
+    "*.h"
+    "*.cpp"
 )
 
 # Export no symbols by default (if the compiler supports it).
