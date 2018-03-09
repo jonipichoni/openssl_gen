@@ -28,7 +28,7 @@ void X::mX() {
 void X::mXOpenssl() {
 	OpenSSLWrapper::createCertificate();
 
-	auto store = std::make_unique<PKeyStore>();
+	auto store = std::make_unique<PKeyStore>(2048);
 	store->init();
 
 	for (int i = 0; i < 50; i++) {
