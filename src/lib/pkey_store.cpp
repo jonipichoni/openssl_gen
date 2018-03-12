@@ -3,7 +3,11 @@
 #include <thread>
 #include "log.h"
 
-#define POOL_SIZE 5
+#include <iostream>
+#include <chrono>
+
+
+#define POOL_SIZE 10
 #define DEF_PKEY_SIZE 2048
 
 PKeyStore::PKeyStore() : 
@@ -20,18 +24,31 @@ PKeyStore::~PKeyStore()
 
 void PKeyStore::init()
 {
+	
+
 	ossl_lib::Logger::GetLogger()->error(
 		"Initialize Private Key Store called");
 
+	std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+
 	fillPool();
 
-	consumerAsync();
+	std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+
+	//auto duration = std::chrono::duration_cast<microseconds>(t2 - t1).count()
+
+	auto dur_s = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count();
+	auto dur_m = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+
+	ossl_lib::Logger::GetLogger()->error(
+		"Execution Time: {} s {} microsec", dur_s, dur_m);
+
+	//consumerAsync();
 }
 
 
 EVP_KEY_sptr PKeyStore::getKey()
 {
-
 	std::unique_lock<std::mutex> mlock(m_mutex);
 
 	while (m_queue.empty())
@@ -97,8 +114,8 @@ void PKeyStore::fillPool()
 
 		m_cond.notify_one();
 
-		ossl_lib::Logger::GetLogger()->error(
-			"Key Generated");
+		/*ossl_lib::Logger::GetLogger()->error(
+			"Key Generated");*/
 	}	
 
 	m_fillingPool = false;
