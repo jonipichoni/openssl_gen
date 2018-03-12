@@ -3,6 +3,7 @@
 #include <queue>
 #include <mutex>
 #include <atomic>
+#include <condition_variable>
 
 #include "openssl_defs.h"
 
